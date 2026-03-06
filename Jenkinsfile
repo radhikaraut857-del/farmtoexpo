@@ -4,10 +4,10 @@ agent any
 ```
 stages {
 
-    stage('Clone Repository') {
+    stage('Checkout Code') {
         steps {
-            echo "Cloning GitHub repository..."
-            git branch: 'main', url: 'https://github.com/radhikaraut/myproject.git'
+            echo "Cloning the repository..."
+            checkout scm
         }
     }
 
@@ -31,11 +31,14 @@ stages {
 }
 
 post {
+    always {
+        echo "Pipeline execution completed."
+    }
     success {
-        echo "Pipeline executed successfully!"
+        echo "Build was successful."
     }
     failure {
-        echo "Pipeline failed!"
+        echo "Build failed."
     }
 }
 ```
